@@ -6,4 +6,47 @@
     justify-content: space-between;
     background-color: $color1;
     color: $color5;
+    .logo{
+        display: flex;
+        align-items: center;
+        img{
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 20px;
+        } 
+        >div{
+            >div:first-child{
+                font-size: 1.4rem;
+            }
+            font-size: 1.3rem;
+            color: white;
+            font-weight: 600;
+        }
+    }
+    .nav-main{
+        input{
+            background: rgba(255, 255, 255, 0.329);
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 1.2rem;
+            margin: auto;
+            &::placeholder{
+                color: $color5;
+                opacity: 0.75;
+            }
+        }
+    }
+    .nav-profile{
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        img{
+            height: 50px;
+            width: 50px;
+            padding: 0 10px;
+
+        }
+    }
 }
