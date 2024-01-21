@@ -1,14 +1,80 @@
-.user{
-          
+@import "../variables.scss";
+
+.user {
+  margin: auto;
+  padding-top: 50px;
+  width: 70%;
+  background-color: antiquewhite;
+  .user-profile {
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    .pic{
+      width: 33%;
+      display: flex;
+      img{
+        height: 150px;
+        width: 150px;
+        margin: auto;
+      }
+    }
+    .details{
+      width: 60%;
+      h3{
+        font-size: 1.5rem;
+      }
+      div{
+        ul{
+          display: flex;
+          flex-wrap: wrap;
+          li{
+            list-style: none;
+            margin-right: 10px;
+            span{
+              margin-right: 5px;
+              font-size: 1.1rem;
+              font-weight: 600;
+              
+            }
+          }
+        }
+      }
+      section{
+        margin: 20px 0;
+      }
+    }
+
+  }
+  hr{
+    width: 85%;
     margin: auto;
-   padding-top: 50px;
-    width: 70%;
-    background-color: antiquewhite;
-    .user-profile{
-        width: 100%;
+    border: 1px solid grey;
+    border-top: 0;
+  }
+  .user-coupons {
+    margin: 20px;
+    padding-bottom: 50px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    ul{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      li{
+        list-style: none;
+        cursor: pointer;
+        margin: 0 10px;
+        &.active{
+          border-bottom: 2px solid grey;
+        }
+      }
+
     }
-    .user-coupons{
-        margin-top: 100px;
-        width:100%;
-    }
+  }
 }
