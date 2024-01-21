@@ -1,4 +1,9 @@
 .home{
-    display:grid;         
+    display:flex;    
+    flex-wrap: wrap;    
+   width:70%;
+   margin:auto;
+    justify-content: center;
+    align-items: center;
     overflow:scroll ;
 }
