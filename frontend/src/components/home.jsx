@@ -15,9 +15,14 @@ const Home = () => {
     )
 })       
   return (
+    
     <div className='home'>
+      <div className='heading'>
+        Coupons
+      </div>
       {coupons}
     </div>
+   
   )
 }
 
