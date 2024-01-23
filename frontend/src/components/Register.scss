@@ -8,24 +8,25 @@ $secondary-color: #2c3e50;
 $border-color: #bdc3c7;
 
 // Body styles
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
+// body {
+//   font-family: Arial, sans-serif;
+//   margin: 0;
+//   padding: 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 100vh;
+// }
 
 // Form container
 .register{
+  margin: calc(50vh - 200px) auto;
   background-color: #dce3ed;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 250px;
-}
+
 h1{
     margin-bottom: 20px;
 }
@@ -58,4 +59,5 @@ input {
   &:hover {
     background-color: darken($primary-color, 10%);
   }
+}
 }

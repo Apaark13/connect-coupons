@@ -9,25 +9,21 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Footer from './components/footer';
 
 const App = () => {
+  const showNavbar = !window.location.pathname.includes('/login') && !window.location.pathname.includes('/register');
+
   return (
-    // <Router>
-    //   <div>
-        
-    //     <Navbar />
-    //     <Routes>
-    //       <Route path="/" element={<Home/>} />
-    //       <Route path="/user" element={<User/>} />
-    //     </Routes>
-      
-    //   </div>
-    //   <Footer/>
-    // </Router>
-    <div>
-     
-      <Register/>
-    
-    </div>
-    
+    <Router>
+      <div>
+        {showNavbar && <Navbar />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+      {showNavbar && <Footer />}
+    </Router>
   );
 };
 

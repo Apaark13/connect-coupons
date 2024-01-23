@@ -2,7 +2,6 @@
 
 import React from 'react';
 import './Footer.scss';
-import '@fortawesome/fontawesome-svg-core/styles.css';
 
 const Footer = () => {
   return (
