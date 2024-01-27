@@ -1,5 +1,6 @@
 import React from 'react'
 import {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import './Login.scss'
 
 
@@ -7,6 +8,8 @@ const Login = () => {
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
+    const navigateTo = useNavigate(); 
+
     async function loginUser(event){
       event.preventDefault()
      const res=await fetch('http://localhost:5000/login',{
@@ -20,6 +23,10 @@ const Login = () => {
        }),
    })
    const data=await res.json()
+   if(data.status==='ok')
+    {
+    navigateTo('/')
+   }
    console.log(data)
     }
   return (

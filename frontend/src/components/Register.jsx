@@ -1,12 +1,13 @@
-import {useState,useHistory} from 'react'
-import { unstable_HistoryRouter } from 'react-router-dom'
+import {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+
 import './Register.scss'
 
 function Register() {
   const [name,setName]=useState('')
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
- 
+  const navigateTo = useNavigate(); 
  async function registerUser(event)
  {
 
@@ -23,8 +24,11 @@ function Register() {
        }),
    })
    const data=await res.json()
-   console.log(data)
- 
+   console.log(data.status)
+ if(data.status==='ok')
+ {
+  navigateTo('/login')
+ }
  }
   return (
     <div className='register'>
