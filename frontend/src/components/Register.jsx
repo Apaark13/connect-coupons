@@ -6,34 +6,30 @@ function Register() {
   const [name,setName]=useState('')
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
-  //  const history=useHistory()
-//  async function registerUser(event)
-//  {
+ 
+ async function registerUser(event)
+ {
 
-//   event.preventDefault()
-//    const res=await fetch('http://localhost:5000/api/register',{
-//    method:'POST',  
-//    headers:{
-//         'Content-Type':'application/json',
-//        },
-//    body:JSON.stringify({
-//         name,
-//         email,
-//         password
-//        }),
-//    })
-//    console.log(res.body)
-//    const data=await res.json()
-//    console.log(data)
-//   //  if(data.status==='ok')
-//   //  {
-//   //   history.pushState('/login')
-//   //  }
-//  }
+  event.preventDefault()
+   const res=await fetch('http://localhost:5000/register',{
+   method:'POST',  
+   headers:{
+        'Content-Type':'application/json',
+       },
+   body:JSON.stringify({
+        name,
+        email,
+        password
+       }),
+   })
+   const data=await res.json()
+   console.log(data)
+ 
+ }
   return (
     <div className='register'>
       <h1>Register</h1>
-      <form >
+      <form onSubmit={registerUser}>
            <input 
            value={name}
            onChange={(e)=>setName(e.target.value)}

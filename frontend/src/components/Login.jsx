@@ -7,11 +7,26 @@ const Login = () => {
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
+    async function loginUser(event){
+      event.preventDefault()
+     const res=await fetch('http://localhost:5000/login',{
+     method:'POST',  
+     headers:{
+        'Content-Type':'application/json',
+       },
+   body:JSON.stringify({
+        email,
+        password
+       }),
+   })
+   const data=await res.json()
+   console.log(data)
+    }
   return (
     <div className='login'>
       
       <h1>Login</h1>
-      <form >
+      <form onSubmit={loginUser}>
           
            <input 
             value={email}
