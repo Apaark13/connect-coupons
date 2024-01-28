@@ -25,7 +25,7 @@ const Login = () => {
    const data=await res.json()
    if(data.status==='ok')
     {
-    navigateTo('/')
+    navigateTo('/user')
    }
    console.log(data)
     }
