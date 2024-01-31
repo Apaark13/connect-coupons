@@ -4,8 +4,9 @@ import data from "../data";
 import Coupon from "./coupon";
 
 const User = () => {
+
   const coupons = data.map((item) => {
-    return <Coupon key={item.lmd_id} {...item} />;
+    return <Coupon key={item._id} {...item} />;
   });
   return (
     <div className="user">
@@ -37,7 +38,13 @@ const User = () => {
         </div>
       </div>
       <hr />
+      <div className="addcoupon">
+        <button>
+          Add Coupon
+        </button>
+      </div>
       <div className="user-coupons">
+        
         <ul>
           <li
           //  className="active"

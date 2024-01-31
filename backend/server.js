@@ -8,7 +8,7 @@ mongoose.connect(url)
 app.use(express.json());
 app.use(cors())
 app.use('/',require('./routes/LoginRegister'))
-
+app.use('/users',require('./routes/coupon'))
 app.listen(5000,()=>{
     console.log('server started')
 })

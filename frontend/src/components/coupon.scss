@@ -1,5 +1,5 @@
 .coupon{
-    height: 250px;
+    height: 255px;
     width:220px;
     border:2px solid black;
     border-radius: 20px;
@@ -8,7 +8,7 @@
     
 
     .img{
-        height: 35%;
+        height: 33%;
        
         img{
             width: 100%;
@@ -41,6 +41,9 @@
             margin-bottom: 7px;
             overflow:hidden;
         }
+    }
+    .valid{
+        margin-top: 5px;
     }
 
 }

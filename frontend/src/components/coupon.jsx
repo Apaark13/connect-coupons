@@ -17,6 +17,9 @@ const Coupon = (props) => {
         <div>
           {props.code}
         </div>
+        <div className="valid">
+          Valid Upto: {props.end_date}
+        </div>
       </div>
       </div>
     </div>
