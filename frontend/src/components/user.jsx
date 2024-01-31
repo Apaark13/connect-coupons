@@ -2,6 +2,7 @@ import React from "react";
 import "./user.scss";
 import data from "../data";
 import Coupon from "./coupon";
+import AddCoupon from "./AddCoupon";
 
 const User = () => {
 
@@ -39,9 +40,7 @@ const User = () => {
       </div>
       <hr />
       <div className="addcoupon">
-        <button>
-          Add Coupon
-        </button>
+          <AddCoupon/>
       </div>
       <div className="user-coupons">
         
