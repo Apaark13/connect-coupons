@@ -1,6 +1,11 @@
+// Navbar.jsx
+import React from 'react';
+import { useAuth } from '../authContext'; // Import the AuthContext
 import "./navbar.scss";
 
 const Navbar = () => {
+  const { user, logout } = useAuth(); // Use the useAuth hook to access the context
+
   return (
     <div className="navbar">
       <div className="logo">
@@ -12,8 +17,16 @@ const Navbar = () => {
       </div>
       <div className="nav-main"><input type="text" placeholder="Search" /></div>
       <div className="nav-profile">
-        <img src="./assets/user.png" alt="" />
-        Dummy</div>
+        {user ? (
+          <>
+            <img src="./assets/user.png" alt="" />
+            {user} {/* Assuming 'name' is a property of your user object */}
+            <button onClick={logout}>Logout</button>
+          </>
+        ) : (
+          <span>Not logged in</span>
+        )}
+      </div>
     </div>
   );
 };

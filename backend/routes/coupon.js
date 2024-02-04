@@ -5,8 +5,7 @@ const router=express.Router()
 const Coupon=require('../models/coupon.model')
 const {deleteOne} = require('../models/user.model')
 
-
-router.get('/get/:email',async(req,res)=>{
+ router.get('/get/:email',async(req,res)=>{
   try{
           const usercoupons=await Coupon.find({email:req.params.email})
           res.send(usercoupons)
@@ -19,7 +18,7 @@ router.get('/get/:email',async(req,res)=>{
 router.get('/get',async(req,res)=>{
   try{
           const usercoupons=await Coupon.find()
-          res.send(usercoupons)
+          res.json(usercoupons)
   }
   catch(err)
   {
@@ -27,12 +26,14 @@ router.get('/get',async(req,res)=>{
   }
 })
 router.post('/post',async(req,res)=>{
+  console.log('he')
   try{
     const coupon=await Coupon.create({
         email:req.body.email,
         title:req.body.title,
+        code:req.body.code,
         description:req.body.description,
-        end_date:req.body.description
+        end_date:req.body.end_date
     })
     res.json({status:'ok'})
   }
@@ -50,7 +51,6 @@ router.delete('/delete/:id',async(req,res)=>{
            res.send({status:'ok'})
            else
            res.send({status:'error'})
-
     }
     catch(err)
     {
