@@ -32,7 +32,7 @@ function AddCoupon() {
           description:couponDescription,
           title:couponTitle,
           end_date:date,
-          email:user
+          email:'pg@gmail.com'
           }),
       })
       const data=await res.json()

@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useState ,useEffect} from "react";
 import "./user.scss";
 import data from "../data";
 import Coupon from "./coupon";
+import { useAuth } from '../authContext';
 import AddCoupon from "./AddCoupon";
 
 const User = () => {
+  const { user} = useAuth();
+  const [coupons, setCoupons] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/users/get/${user}`);
+         console.log(`http://localhost:5000/users/get/${user}`)
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
 
-  const coupons = data.map((item) => {
-    return <Coupon key={item._id} {...item} />;
-  });
+        const data = await response.json();
+        const mappedCoupons = data.map(item => (
+          <Coupon key={item.lmd_id} {...item} />
+        ));
+
+        setCoupons(mappedCoupons);
+      } catch (error) {
+        setError('Error fetching data');
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className="user">
       <div className="user-profile">
