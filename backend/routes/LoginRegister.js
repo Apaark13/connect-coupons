@@ -3,8 +3,10 @@ const mongoose=require('mongoose')
 const cors = require('cors');
 const router = express.Router()
 const User=require('../models/user.model')
+const jwt=require('jsonwebtoken')
 
 router.post('/register',async(req,res)=>{
+    
     try{
         const userfind=await User.findOne(
             {
@@ -40,7 +42,10 @@ router.post('/login',async(req,res)=>{
     )
     if(user)
     {
-    res.json({status:'ok',user:true})
+        const token=jwt.sign({
+        email:user.email
+        },'secret123')
+        res.json({status:'ok',user:token})
     }
     else
     {

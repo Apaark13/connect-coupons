@@ -25,16 +25,19 @@ const Login = () => {
       });
 
       const data = await res.json();
-
-      console.log(data, email)
-      if (data.status === "ok") {
-        // Call the login method with user data to update the authentication state
+      console.log(data.user)
+       if(data.user)
+       {
+        localStorage.setItem('token',data.user)
+        alert('Login Succesfull')
         login(email);
         navigateTo("/");
-      } else {
-        console.error("Login failed:", data.error);
-        // Handle login failure, display error message, etc.
-      }
+       }
+       else{
+        alert('Please check your username and password')
+       }
+      console.log(data, email)
+     
 
     } catch (error) {
       console.error("An error occurred during login:", error);
