@@ -29,7 +29,7 @@ const Login = () => {
        if(data.user)
        {
         localStorage.setItem('token',data.user)
-        alert('Login Succesfull')
+        console.log('Login successfull')
         login(email);
         navigateTo("/");
        }

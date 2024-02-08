@@ -8,26 +8,26 @@ import { useAuth } from '../authContext';
 import './navbar.scss';
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { user, logout,login } = useAuth();
   const navigateTo = useNavigate();
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
+  useEffect(() => {
+    const token = localStorage.getItem('token');
 
-  //   if (token) {
-  //     try {
-  //       const decodedUser = jwt.decode(token);
-  //       console.log(decodedUser);
-  //       // Assuming 'name' is a property of your user object
-  //       if (decodedUser) {
-  //         login(decodedUser.email); // Assuming you want to update the user state
-  //       }
-  //     } catch (error) {
-  //       console.error('Error decoding token:', error);
-  //       // Handle decoding errors if necessary
-  //     }
-  //   }
-  // }, [login]); // Add login to the dependencies if it's part of the user state update
+    if (token) {
+      try {
+        const decodedUser = jwt.decode(token);
+        console.log(decodedUser);
+        
+        if (decodedUser) {
+          login(decodedUser.email); 
+        }
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        // Handle decoding errors if necessary
+      }
+    }
+  }, [login]); // Add login to the dependencies if it's part of the user state update
 
   const handleClick = () => {
     navigateTo('/user');
