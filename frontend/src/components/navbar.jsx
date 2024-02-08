@@ -1,8 +1,10 @@
 // Navbar.jsx
+import jwt from 'jsonwebtoken';
+
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../authContext';
-// import jwt from 'jsonwebtoken';
+
 import './navbar.scss';
 
 const Navbar = () => {
