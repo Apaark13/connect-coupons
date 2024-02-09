@@ -6,19 +6,24 @@ import { useAuth } from '../authContext';
 import AddCoupon from "./AddCoupon";
 
 const User = () => {
-  const { user} = useAuth();
+  const { user,login} = useAuth();
+  const [loading, setLoading] = useState(true);
   const [coupons, setCoupons] = useState([]);
   const [error, setError] = useState(null);
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
+       
+        console.log(user)
         const response = await fetch(`http://localhost:5000/users/get/${user}`);
          console.log(`http://localhost:5000/users/get/${user}`)
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
-
+        
         const data = await response.json();
+        console.log(data)
         const mappedCoupons = data.map(item => (
           <Coupon key={item.lmd_id} {...item} />
         ));
