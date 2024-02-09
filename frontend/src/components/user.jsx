@@ -2,40 +2,59 @@ import React, { useState ,useEffect} from "react";
 import "./user.scss";
 import data from "../data";
 import Coupon from "./coupon";
-import { useAuth } from '../authContext';
 import AddCoupon from "./AddCoupon";
+import jwt from 'jsonwebtoken'
 
 const User = () => {
-  const { user,login} = useAuth();
-  const [loading, setLoading] = useState(true);
+
   const [coupons, setCoupons] = useState([]);
   const [error, setError] = useState(null);
- 
+ const [cur,setCur]=useState()
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-       
-        console.log(user)
-        const response = await fetch(`http://localhost:5000/users/get/${user}`);
-         console.log(`http://localhost:5000/users/get/${user}`)
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
+        const token = localStorage.getItem('token');
+  
+        if (token) {
+          try {
+            const decodedUser = jwt.decode(token);
+            console.log(decodedUser);
+            
+            if (decodedUser) {
+              setCur(decodedUser.email);
+            }
+          } catch (error) {
+            console.error('Error decoding token:', error);
+            //
+          }
         }
-        
-        const data = await response.json();
-        console.log(data)
-        const mappedCoupons = data.map(item => (
-          <Coupon key={item.lmd_id} {...item} />
-        ));
-
-        setCoupons(mappedCoupons);
+  
+        if (cur) {
+          const response = await fetch(`http://localhost:5000/users/get/${cur}`);
+          console.log(`http://localhost:5000/users/get/${cur}`);
+  
+          if (!response.ok) {
+            throw new Error('Failed to fetch data');
+          }
+  
+          const data = await response.json();
+          console.log(data);
+  
+          const mappedCoupons = data.map(item => (
+            <Coupon key={item.lmd_id} {...item} />
+          ));
+  
+          setCoupons(mappedCoupons);
+        }
       } catch (error) {
         setError('Error fetching data');
       }
     };
-
+  
     fetchData();
-  }, []);
+  }, [cur]); 
+  
   return (
     <div className="user">
       <div className="user-profile">

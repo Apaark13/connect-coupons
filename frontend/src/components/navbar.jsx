@@ -1,15 +1,13 @@
 // Navbar.jsx
 import jwt from 'jsonwebtoken';
-
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../authContext';
-
 import './navbar.scss';
 
 const Navbar = () => {
-  const { user, logout,login } = useAuth();
+
   const navigateTo = useNavigate();
+  const [cur,setCur]=useState();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -17,22 +15,22 @@ const Navbar = () => {
     if (token) {
       try {
         const decodedUser = jwt.decode(token);
-        console.log(decodedUser);
-        
         if (decodedUser) {
-          login(decodedUser.email); 
+          setCur(decodedUser.email); 
         }
       } catch (error) {
         console.error('Error decoding token:', error);
-        // Handle decoding errors if necessary
+        
       }
     }
-  }, [login]); // Add login to the dependencies if it's part of the user state update
-
+  }, [cur]); 
   const handleClick = () => {
     navigateTo('/user');
   };
-
+  const handleLogout=()=>{
+     localStorage.removeItem('token')
+     setCur(null)
+  }
   return (
     <div className="navbar">
       <div className="logo">
@@ -46,11 +44,11 @@ const Navbar = () => {
         <input type="text" placeholder="Search" />
       </div>
       <div className="nav-profile">
-        {user ? (
+        {cur ? (
           <>
             <img onClick={handleClick} src="./assets/user.png" alt="" />
-            {user} {/* Assuming 'name' is a property of your user object */}
-            <button onClick={logout}>Logout</button>
+            {cur} {/* Assuming 'name' is a property of your user object */}
+            <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
           <span>Not logged in</span>
