@@ -27,10 +27,7 @@ const Navbar = () => {
   const handleClick = () => {
     navigateTo('/user');
   };
-  const handleLogout=()=>{
-     localStorage.removeItem('token')
-     setCur(null)
-  }
+ 
   return (
     <div className="navbar">
       <div className="logo">
@@ -48,7 +45,7 @@ const Navbar = () => {
           <>
             <img onClick={handleClick} src="./assets/user.png" alt="" />
             {cur} {/* Assuming 'name' is a property of your user object */}
-            <button onClick={handleLogout}>Logout</button>
+           
           </>
         ) : (
           <span>Not logged in</span>

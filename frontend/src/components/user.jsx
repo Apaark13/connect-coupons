@@ -4,13 +4,14 @@ import data from "../data";
 import Coupon from "./coupon";
 import AddCoupon from "./AddCoupon";
 import jwt from 'jsonwebtoken'
+import { useNavigate } from "react-router-dom";
 
 const User = () => {
 
   const [coupons, setCoupons] = useState([]);
   const [error, setError] = useState(null);
  const [cur,setCur]=useState()
-
+ const navigateTo = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,7 +55,10 @@ const User = () => {
   
     fetchData();
   }, [cur]); 
-  
+  const handleLogout=()=>{
+    localStorage.removeItem('token')
+    navigateTo('/login')
+ }
   return (
     <div className="user">
       <div className="user-profile">
@@ -62,20 +66,16 @@ const User = () => {
           <img src="/assets/user.png" alt="" />
         </div>
         <div className="details">
-          <h3>Dummy User</h3>
-          <div>
-            <ul>
-              <li>
-                <span>4</span>Sent
-              </li>
-              <li>
-                <span>12</span>Received
-              </li>
-              <li>
-                <span>23</span>Coupons
-              </li>
-            </ul>
+          <div className="div1">
+          <div className="div2">
+          <h1>{cur}</h1>
+          <h4> User Coupons :{coupons.length}</h4>
           </div>
+           <div className="div3">
+           <button class="logout-button" onClick={handleLogout}>Logout</button>
+
+           </div>
+           </div>
           <section>
             bio - Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Inventore dolores distinctio deserunt enim eaque aperiam quo
@@ -84,21 +84,12 @@ const User = () => {
           </section>
         </div>
       </div>
-      <hr />
       <div className="addcoupon">
           <AddCoupon/>
       </div>
+      <hr />
+      
       <div className="user-coupons">
-        
-        <ul>
-          <li
-          //  className="active"
-          >
-            All
-          </li>
-          <li className="active">Sent</li>
-          <li>Received</li>
-        </ul>
         {coupons}
       </div>
     </div>
