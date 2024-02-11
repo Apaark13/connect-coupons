@@ -1,7 +1,7 @@
 // AddCoupon.js
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './AddCoupon.scss'
-import { useAuth } from '../authContext';
+
 
 
 function AddCoupon() {
@@ -10,7 +10,24 @@ function AddCoupon() {
   const [couponDescription,setCouponDescription]=useState();
   const [endDate,setEndDate]=useState();
   const [couponCode,setCouponCode]=useState();
-   const {user}=useAuth()
+  const [cur,setCur]=useState();
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      try {
+        const decodedUser = jwt.decode(token);
+        
+        
+        if (decodedUser) {
+          setCur(decodedUser.email); 
+        }
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        
+      }
+    }
+  }, []); 
 
   const openPopup = () => {
     setPopupOpen(true);
@@ -32,7 +49,7 @@ function AddCoupon() {
           description:couponDescription,
           title:couponTitle,
           end_date:date,
-          email:'pg@gmail.com'
+          email:cur
           }),
       })
       const data=await res.json()

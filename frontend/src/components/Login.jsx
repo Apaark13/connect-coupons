@@ -1,14 +1,14 @@
 // Login.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../authContext";
+
 import "./login.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigateTo = useNavigate();
-  const { login } = useAuth();
+
 
   async function loginUser(event) {
     event.preventDefault();
@@ -30,13 +30,12 @@ const Login = () => {
        {
         localStorage.setItem('token',data.user)
         console.log('Login successfull')
-        login(email);
         navigateTo("/");
        }
        else{
         alert('Please check your username and password')
        }
-      console.log(data, email)
+    
      
 
     } catch (error) {

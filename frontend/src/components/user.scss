@@ -22,10 +22,43 @@
       }
     }
     .details{
+      
       width: 60%;
-      h3{
-        font-size: 1.5rem;
+      .div1{
+        display: flex;
+        flex-direction: row;
+       
+       .div2{
+        margin: auto;
+        margin-left: 10px;
+        h1{
+          font-size: 2 rem;
+          margin-bottom: 15px;
+          
+        }
       }
+      .div3{
+        .logout-button {
+          background-color: #b25a5a; /* Darker red background color */
+          color: #fff;
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+        
+        .logout-button:hover {
+          background-color: #822828; /* Slightly darker red color on hover */
+        }
+        
+        .logout-button:active {
+          background-color: #741f1f; /* Even darker red color on button press */
+        }
+        
+      }
+    }
       div{
         ul{
           display: flex;
@@ -59,11 +92,15 @@
     margin-left: auto;
     display: flex;
     justify-content: center;
-
+   
     button{
       margin-top: 5px;
-      background-color: $color4;
+      background-color: #405b8b;
+      color:  #fff; ;
     
+    }
+    button:hover {
+      background-color: #2a477b /* Slightly darker red color on hover */
     }
   }
   .user-coupons {

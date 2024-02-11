@@ -1,25 +1,34 @@
 import React from "react";
 import "./coupon.scss";
 
-const Coupon = (props) => {
+
+const Coupon = (coupon) => {
   return (
-    <div className="coupon">
-      <div className="img">
-        <img src='/assets/coupon-img.jpg' alt="" />
+    <div className="coupon-container">
+      <div className="image">
+       <img src="/assets/user.png" alt="" />
+      <h2>{coupon.email}</h2>
       </div>
-      <div className="coupon-img">
-        <img src="/assets/user.png" alt="" />
-      <div className="details">
-        <div className="title">
-          {props.title}
-        </div>
-        <div className="description">{props.description}</div>
+      <hr />
+      <div className="coupon">
+      <div className="coupon-details">
         <div>
-          {props.code}
+          <strong>Coupon Code:</strong> {coupon.code}
         </div>
-        <div className="valid">
-          Valid Upto: {props.end_date}
+        <div>
+          <strong>Category:</strong> {coupon.title}
         </div>
+        <div>
+          <strong>Expires:</strong> {coupon.end_date}
+        </div>
+        <div>
+          <strong>Offer:</strong> {coupon.title}
+        </div>
+       
+      </div>
+      <div className="coupon-description">
+        <strong>Description:</strong>
+        <p>{coupon.description}</p>
       </div>
       </div>
     </div>

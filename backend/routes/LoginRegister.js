@@ -40,11 +40,9 @@ router.post('/login',async(req,res)=>{
             password:req.body.password
         }
     )
-    console.log('hjsbfj')
-    console.log(user)
+    
     if(user)
     {
-        console.log(user.email)
         const token=jwt.sign({
         email:user.email
         },'secret123')
