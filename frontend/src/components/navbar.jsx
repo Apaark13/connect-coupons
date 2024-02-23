@@ -25,7 +25,7 @@ const Navbar = () => {
     }
   }, [cur]); 
   const handleClick = () => {
-    navigateTo('/user');
+    navigateTo(`/user/${cur}`);
   };
  
   return (
@@ -43,7 +43,7 @@ const Navbar = () => {
       <div className="nav-profile">
         {cur ? (
           <>
-            <img onClick={handleClick} src="./assets/user.png" alt="" />
+            <img onClick={handleClick} src="/assets/user.png" alt="" />
             {cur} {/* Assuming 'name' is a property of your user object */}
            
           </>

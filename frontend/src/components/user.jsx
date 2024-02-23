@@ -5,13 +5,17 @@ import Coupon from "./coupon";
 import AddCoupon from "./AddCoupon";
 import jwt from 'jsonwebtoken'
 import { useNavigate } from "react-router-dom";
+import {useParams} from 'react-router-dom';
 
 const User = () => {
+  const { userId } = useParams();
 
   const [coupons, setCoupons] = useState([]);
   const [error, setError] = useState(null);
  const [cur,setCur]=useState()
  const navigateTo = useNavigate();
+  console.log(cur);
+  console.log(userId)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,18 +31,17 @@ const User = () => {
             }
           } catch (error) {
             console.error('Error decoding token:', error);
-            //
-          }
-        }
+      }
+    }
   
         if (cur) {
-          const response = await fetch(`http://localhost:5000/users/get/${cur}`);
+          const response = await fetch(`http://localhost:5000/users/get/${userId}`);
           console.log(`http://localhost:5000/users/get/${cur}`);
-  
+        
           if (!response.ok) {
             throw new Error('Failed to fetch data');
           }
-  
+
           const data = await response.json();
           console.log(data);
   
@@ -68,12 +71,13 @@ const User = () => {
         <div className="details">
           <div className="div1">
           <div className="div2">
-          <h1>{cur}</h1>
+          <h1>{userId}</h1>
           <h4> User Coupons :{coupons.length}</h4>
           </div>
            <div className="div3">
-           <button class="logout-button" onClick={handleLogout}>Logout</button>
-
+           {    
+              userId==cur?<button class="logout-button" onClick={handleLogout}>Logout</button>:<div></div>
+           }
            </div>
            </div>
           <section>
@@ -85,7 +89,10 @@ const User = () => {
         </div>
       </div>
       <div className="addcoupon">
-          <AddCoupon/>
+        {
+          userId==cur?<AddCoupon/>:<></>
+        }
+          
       </div>
       <hr />
       

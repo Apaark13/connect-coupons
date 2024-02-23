@@ -19,9 +19,10 @@ const App = () => {
         {showNavbar && <Navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/user" element={<User />} />
+          <Route path="/user/:userId" element={<User />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/user/profile" element={<Register />} />
         </Routes>
         {showNavbar && <Footer />}
       </div>
