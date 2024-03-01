@@ -3,17 +3,31 @@ const mongoose=require('mongoose')
 const cors=require('cors')
 const router=express.Router()
 const Coupon=require('../models/coupon.model')
-const {deleteOne} = require('../models/user.model')
+const User=require('../models/user.model')
+
 
  router.get('/get/:email',async(req,res)=>{
   try{
           const usercoupons=await Coupon.find({email:req.params.email})
           res.send(usercoupons)
+          
   }
   catch(err)
   {
       console.log(err)
   }
+})
+router.get('/allusers',async(req,res)=>{
+  try{
+    const users=await User.find()
+    console.log(users)
+    res.json(users)
+  }
+  catch(err)
+  {
+    console.log(err)
+  }
+  
 })
 router.get('/get',async(req,res)=>{
   try{

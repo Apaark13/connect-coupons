@@ -5,9 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import './navbar.scss';
 
 const Navbar = () => {
-
+  const [users,setUsers]=useState();
   const navigateTo = useNavigate();
   const [cur,setCur]=useState();
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -27,7 +30,40 @@ const Navbar = () => {
   const handleClick = () => {
     navigateTo(`/user/${cur}`);
   };
- 
+  
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        handleSearch();
+      }
+    };
+  const handleSearch=async()=>{
+   
+    try {
+      const response = await fetch("http://localhost:5000/users/allusers");
+    
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const data = await response.json();
+      setUsers(data);
+      console.log(users);
+      const filteredResults = await users.filter(user =>
+        user.name.toLowerCase().includes(query.toLowerCase()) ||
+        user.email.toLowerCase().includes(query.toLowerCase())
+      );
+     
+      setResults(filteredResults);
+      console.log(results);
+    
+      
+    } catch (error) {
+      setError('Error fetching data');
+   }
+
+
+};
+
   return (
     <div className="navbar">
       <div className="logo">
@@ -38,7 +74,24 @@ const Navbar = () => {
         </div>
       </div>
       <div className="nav-main">
-        <input type="text" placeholder="Search" />
+      <input
+      placeholder='Search the user'
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyPress}
+      /> 
+      {
+  results && results.map((user) => (
+    query && (
+      <li key={user.id}>
+        <strong>{user.name}</strong> - {user.email}
+      </li>
+    )
+  ))
+}
+
+   
       </div>
       <div className="nav-profile">
         {cur ? (
