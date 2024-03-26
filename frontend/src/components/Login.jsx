@@ -45,7 +45,13 @@ const Login = () => {
   }
 
   return (
+    <div className="login-full">
+    <div className="login-logo">
+         Connect coupons
+       </div>
+   
     <div className="login">
+      
       <h1>Login</h1>
       <form onSubmit={loginUser}>
       <input
@@ -64,6 +70,8 @@ const Login = () => {
         <br />
         <input className="button" type="submit" value="Login" />
       </form>
+      Do not have an account?  <a href="/register" target="_blank" rel="noopener noreferrer">Register</a>
+    </div>
     </div>
   );
 };

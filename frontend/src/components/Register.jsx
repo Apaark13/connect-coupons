@@ -55,6 +55,8 @@ function Register() {
            <br/>
             <input className='button' type='submit' value='Register'/>
       </form>
+      Already have an account?  <a href="/login" target="_blank" rel="noopener noreferrer">Login</a>
+ 
     </div>
   );
 }
