@@ -19,6 +19,39 @@ $border-color: #bdc3c7;
 // }
 
 // Form container
+.register-full{
+  display: flex;
+  flex-direction: row;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+   box-sizing: border-box;
+
+  .register-logo{
+
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+   width:40%;
+   background-color: #ffffffa9;
+   overflow: hidden;
+   border-top-right-radius: 4%;
+   img{
+    margin-top: 20vh;
+    width: 35%;
+   }
+   .text{
+         font-size: 4vw;
+            color:  #306492;
+            font-weight: 600;
+   }
+  }
+
+
+
+.register-cover{
+  width:60%;
+   overflow: hidden;
 .register{
   margin: calc(50vh - 200px) auto;
   background-color: #dce3ed;
@@ -59,5 +92,7 @@ input {
   &:hover {
     background-color: darken($primary-color, 10%);
   }
+}
+}
 }
 }

@@ -31,7 +31,17 @@ function Register() {
  }
  }
   return (
-    <div className='register'>
+    <div className="register-full">
+    <div className="register-logo">
+    <img src="/assets/logo.png" alt="" />
+        <div className="text">
+          <div>Connect</div>
+          <div>Coupons</div>
+        </div>
+       </div>
+      <div className='register-cover'>
+        
+       <div className='register'>
       <h1>Register</h1>
       <form onSubmit={registerUser}>
            <input 
@@ -56,7 +66,8 @@ function Register() {
             <input className='button' type='submit' value='Register'/>
       </form>
       Already have an account?  <a href="/login" target="_blank" rel="noopener noreferrer">Login</a>
- 
+     </div>
+     </div>
     </div>
   );
 }
