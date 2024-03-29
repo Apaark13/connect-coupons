@@ -10,35 +10,22 @@ import Footer from "./components/footer";
 import { Navigate } from 'react-router-dom';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+ 
   const location = useLocation();
   const navigateTo = useNavigate();
-   useEffect(()=>{
-    if(localStorage.getItem('token'))
-    {
-       setIsLoggedIn(true);
-    }
-    else
-    {
-      setIsLoggedIn(false);
-    }
-   },[])
-  
-   console.log(isLoggedIn)
-  // Condition to determine whether to show the Navbar based on the pathname instead of window using uselocation route, and for this moved the browser router over the app component
-  const showNavbar = !["/login", "/register"].includes(location.pathname);
+    const showNavbar = !["/login", "/register"].includes(location.pathname);
   return (
     // <Router>
       <div>
-        {isLoggedIn && showNavbar && <Navbar />}
+        {localStorage.getItem('token') && showNavbar && <Navbar />}
         <Routes>
-        <Route path="/" element={isLoggedIn ? <Home /> :<Navigate to="/login" />}/>
+        <Route path="/" element={localStorage.getItem('token')? <Home /> :<Navigate to="/login" />}/>
           <Route path="/user/:userId" element={<User />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user/profile" element={<Register />} />
         </Routes>
-        {isLoggedIn && showNavbar && <Footer />}
+        {localStorage.getItem('token') && showNavbar && <Footer />}
       </div>
 
     // </Router>

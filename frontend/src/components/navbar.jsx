@@ -11,7 +11,10 @@ const Navbar = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
 
+  
+   
 
+ 
   useEffect(() => {
     const token = localStorage.getItem('token');
 
@@ -36,8 +39,10 @@ const Navbar = () => {
         handleSearch();
       }
     };
+  useEffect(()=>{ 
+
   const handleSearch=async()=>{
-   
+      console.log('down')
     try {
       const response = await fetch("http://localhost:5000/users/allusers");
     
@@ -49,7 +54,6 @@ const Navbar = () => {
       setUsers(data);
       console.log(users);
       const filteredResults = await users.filter(user =>
-        user.name.toLowerCase().includes(query.toLowerCase()) ||
         user.email.toLowerCase().includes(query.toLowerCase())
       );
      
@@ -60,9 +64,11 @@ const Navbar = () => {
     } catch (error) {
       setError('Error fetching data');
    }
+  };
+  handleSearch();
+  },[query])
 
 
-};
 
   return (
     <div className="navbar">
@@ -74,23 +80,27 @@ const Navbar = () => {
         </div>
       </div>
       <div className="nav-main">
+        <div className='nav-input'>
       <input
       placeholder='Search the user'
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyPress}
-      /> 
+        // onKeyDown={handleKeyPress}
+      />
+      </div> 
+    <div className='search-results'> 
       {
-  results && results.map((user) => (
+     results && results.map((user) => (
     query && (
       <li key={user.id}>
         <strong>{user.name}</strong> - {user.email}
       </li>
     )
-  ))
-}
-
+    ))
+ 
+     }
+      </div>
    
       </div>
       <div className="nav-profile">

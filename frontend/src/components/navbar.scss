@@ -1,6 +1,7 @@
 @import '../variables.scss';
 
 .navbar{
+    // max-height:80px ;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -25,7 +26,10 @@
         }
     }
     .nav-main{
-        input{
+        display: flex;
+        flex-direction: column;
+        .nav-input{
+           input{
             background: rgba(255, 255, 255, 0.329);
             border: none;
             border-radius: 20px;
@@ -37,7 +41,15 @@
                 opacity: 0.75;
             }
         }
-    }
+        }
+        .search-results {
+            overflow-y: scroll;
+            list-style-type: none; /* Remove default list styles */
+            padding: 0;
+            margin: 10px 0;
+          }
+          
+        }
     .nav-profile{
         display: flex;
         align-items: center;

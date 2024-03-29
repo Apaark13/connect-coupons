@@ -30,12 +30,16 @@ const Home =() => {
   }, []);
      
   return (
-    
+    <div className='home-full'>
+      <div className='options'>
+        options
+      </div>
     <div className='home'>
       <div className='heading'>
         Coupons
       </div>
       {coupons}
+    </div>
     </div>
    
   )
