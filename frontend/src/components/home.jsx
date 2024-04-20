@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import data from '../data'
 import Coupon from './coupon'
 import './home.scss'
+import Sidebar from './Sidebar'
 
 const Home =() => {
   const [coupons, setCoupons] = useState([]);
@@ -31,9 +32,7 @@ const Home =() => {
      
   return (
     <div className='home-full'>
-      <div className='options'>
-        options
-      </div>
+       <Sidebar />
     <div className='home'>
       <div className='heading'>
         Coupons

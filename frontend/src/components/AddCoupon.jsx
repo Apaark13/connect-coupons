@@ -1,15 +1,18 @@
 // AddCoupon.js
 import React, { useState,useEffect } from 'react';
+import jwt from "jsonwebtoken";
 import './AddCoupon.scss'
 
 
-
 function AddCoupon() {
+ 
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [couponTitle,setCouponTitle]=useState();
   const [couponDescription,setCouponDescription]=useState();
   const [endDate,setEndDate]=useState();
   const [couponCode,setCouponCode]=useState();
+  const [category,setCategory]=useState();
+  const [website,setWebsite]=useState();
   const [cur,setCur]=useState();
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -38,6 +41,8 @@ function AddCoupon() {
   };
 
   const addCouponFunc = async() =>{
+    
+    console.log(cur)
     const date=endDate.toString()
     const res=await fetch('http://localhost:5000/users/post',{
       method:'POST',  
@@ -49,7 +54,9 @@ function AddCoupon() {
           description:couponDescription,
           title:couponTitle,
           end_date:date,
-          email:cur
+          email:cur,
+          website:website,
+          category:category
           }),
       })
       const data=await res.json()
@@ -72,7 +79,18 @@ function AddCoupon() {
                      onChange={(e)=>setCouponTitle(e.target.value)} 
                      name="couponTitle" required />
               <br />
-
+              <label htmlFor="couponCode">Category:</label>
+              <input type="text" 
+                     id="couponCode" 
+                     onChange={(e)=>setCategory(e.target.value)}
+                     name="couponCode" required />
+              <br />
+              <label htmlFor="couponCode">Website:</label>
+              <input type="text" 
+                     id="couponCode" 
+                     onChange={(e)=>setWebsite(e.target.value)}
+                     name="couponCode" required />
+              <br />
               <label htmlFor="couponDescription">Coupon Description:</label>
               <textarea
                 id="couponDescription"

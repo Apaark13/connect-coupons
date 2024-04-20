@@ -1,6 +1,6 @@
 // Navbar.jsx
 import jwt from "jsonwebtoken";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./navbar.scss";
 
@@ -25,15 +25,25 @@ const Navbar = () => {
       }
     }
   }, [cur]);
+
   const handleClick = () => {
     navigateTo(`/user/${cur}`);
-  };
+    console.log('dd')
+  }
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
+   
+  const handleSearchClick=(email)=>{
+     console.log('dff')
+     console.log(email)
+     setQuery("")
+    navigateTo(`/user/${email}`);
+    
+  }
+  
+  const handleImageClick=()=>{
+    navigateTo('/');
+  }
+  
   useEffect(() => {
     const handleSearch = async () => {
       console.log("down");
@@ -52,9 +62,9 @@ const Navbar = () => {
         );
 
         setResults(filteredResults);
-        console.log(results);
+        
       } catch (error) {
-        setError("Error fetching data");
+        console.log("Error fetching data");
       }
     };
     handleSearch();
@@ -63,7 +73,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="logo">
-        <img src="/assets/logo.png" alt="" />
+        <img onClick={handleImageClick} src="/assets/logo.png" alt="" />
         <div>
           <div>Connect</div>
           <div>Coupons</div>
@@ -80,18 +90,22 @@ const Navbar = () => {
           />
         </div>
 
-        {/* search results  */}
+        
 
         <div className="search-results">
           {results &&
             results.map(
               (user) =>
                 query && (
-                  <li key={user.id}>
+                  <li onClick={()=>handleSearchClick(user.email)} >
                     <strong>{user.name}</strong> - {user.email}
                   </li>
                 )
-            )}
+            )
+          }
+            {
+              !results && <li>USER NOT FOUND</li>
+            }
         </div>
       </div>
       <div className="nav-profile">

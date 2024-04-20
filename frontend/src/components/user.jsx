@@ -6,16 +6,27 @@ import AddCoupon from "./AddCoupon";
 import jwt from 'jsonwebtoken'
 import { useNavigate } from "react-router-dom";
 import {useParams} from 'react-router-dom';
+import Sidebar from './Sidebar'
+
 
 const User = () => {
   const { userId } = useParams();
-
   const [coupons, setCoupons] = useState([]);
   const [error, setError] = useState(null);
- const [cur,setCur]=useState()
- const navigateTo = useNavigate();
-  console.log(cur);
-  console.log(userId)
+  const [cur,setCur]=useState()
+  const navigateTo = useNavigate();
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [info,setInfo]=useState([]);
+  
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+  
+  const openPopup = (item) => {
+    setInfo(item);
+    console.log('yes')
+    setPopupOpen(true);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,7 +57,7 @@ const User = () => {
           console.log(data);
   
           const mappedCoupons = data.map(item => (
-            <Coupon key={item.lmd_id} {...item} />
+            <Coupon key={item.lmd_id} {...item} open={()=>openPopup(item)} close={closePopup}/>
           ));
   
           setCoupons(mappedCoupons);
@@ -57,13 +68,25 @@ const User = () => {
     };
   
     fetchData();
-  }, [cur]); 
+  }, [cur,userId]); 
+
+  
   const handleLogout=()=>{
     localStorage.removeItem('token')
     navigateTo('/login')
  }
+
+ 
+ const handleClick=()=>{
+ 
+  navigateTo(`/user/${info.email}`);
+  
+}
+
+
   return (
     <div className="user">
+     
       <div className="user-profile">
         <div className="pic">
           <img src="/assets/user.png" alt="" />
@@ -76,7 +99,7 @@ const User = () => {
           </div>
            <div className="div3">
            {    
-              userId==cur?<button class="logout-button" onClick={handleLogout}>Logout</button>:<div></div>
+              userId==cur?<button className="logout-button" onClick={handleLogout}>Logout</button>:<div></div>
            }
            </div>
            </div>
@@ -95,11 +118,36 @@ const User = () => {
           
       </div>
       <hr />
-      
+      <div className="wrap">
+        <Sidebar color='#f0ffff'/>
       <div className="user-coupons">
         {coupons}
       </div>
+      </div>
+   
+      {isPopupOpen && (<div className="div">
+
+      <div className="couponbig">
+        
+      <div className="wrap">
+      <div className="img"><img src='/assets/img2.jpg' alt="" /></div>
+      <div className="details">
+        <div className="email">{info.email}</div>
+        <div className="title">{info.title}</div>
+        <div className="category"><span>Category: </span>{info.category}</div>
+        <div className="website"><span>Website: </span>{info.website}</div>
+        <div className="valid">Valid Upto: {info.end_date}</div>
+        <div className="code">{info.code}</div>     
+      </div>
+      </div>
+        <div className="description">{info.description}</div>
+        <button onClick={closePopup}>close</button>
+     </div>
+     </div>
+    )} 
+
     </div>
+    
   );
 };
 

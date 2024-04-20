@@ -47,7 +47,9 @@ router.post('/post',async(req,res)=>{
         title:req.body.title,
         code:req.body.code,
         description:req.body.description,
-        end_date:req.body.end_date
+        end_date:req.body.end_date,
+        category:req.body.category,
+        website:req.body.website
     })
     res.json({status:'ok'})
   }
